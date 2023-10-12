@@ -1,83 +1,21 @@
-# Troubleshooting Guide: "Cannot connect to any known routers" Error
+## Troubleshooting: "Cannot connect to any known routers" Error
 
-## Introduction
+### Problem:
+I encountered the error message "py2neo.errors.ServiceUnavailable: Cannot connect to any known routers" when attempting to connect to a Neo4j database.
 
-This guide addresses the "Cannot connect to any known routers" error related to Neo4j when working with Python and the Py2neo library. This error typically occurs when your Python application attempts to connect to a Neo4j database but fails due to connection issues. The guide aims to help you diagnose and resolve the problem.
+### Solution:
+The root cause of this error can often be traced to the format of the Neo4j connection URI. Ensure that you use the correct connection URI format, which should include "neo4j+ssc://" (for secure connections) rather than just "neo4j+s://". Using the correct format is crucial for establishing a stable connection to your Neo4j database. 
 
-## Common Causes and Solutions
-
-### 1. Check Neo4j Server Configuration
-
-- **Cause**: The Neo4j server configuration might be incorrect.
-- **Solution**:
-  - Verify the Neo4j Server URL.
-  - Double-check the correctness of the server credentials, including the username and password.
-
-### 2. Network and Firewall Issues
-
-- **Cause**: Network problems or firewalls can hinder your application's connection to the Neo4j server.
-- **Solution**:
-  - Ensure that you have a stable network connection.
-  - Investigate if a firewall or network restrictions are blocking the connection. Verify that the required ports are open for Neo4j.
-
-### 3. Incorrect Python Code Configuration
-
-- **Cause**: Your Python code might have incorrect configuration.
-- **Solution**:
-  - Review your Python code for the following:
-    - Verify that the `NEO4J_CONNECTION_URI`, `NEO4J_USERNAME`, and `NEO4J_PASSWORD` variables are set correctly.
-    - Confirm that the Py2neo library is properly installed in your Python environment.
-
-### 4. Database Access Permissions
-
-- **Cause**: You may not have the required access permissions for the Neo4j database.
-- **Solution**: Check your access rights with the database administrator or owner. Ensure you have appropriate access to connect to the database.
-
-## Troubleshooting Steps
-
-To troubleshoot the "Cannot connect to any known routers" error, follow these steps:
-
-1. Re-verify the correctness of your Neo4j server details and your access permissions.
-2. Check network connectivity and firewall settings to ensure they are not obstructing the connection.
-3. Examine your Python code for configuration issues.
-4. Confirm that the Py2neo library is correctly installed in your Python environment.
-
-## Improved code
-
-I've tried improving the code a little to get a better visual about what is going on and make it more clear. Though I'm still looking for the root of the problem.
-
+**Incorrect URI Format:**
 ```python
-import os
-
-from py2neo import Graph
-from py2neo import NodeMatcher, RelationshipMatcher
-
 NEO4J_CONNECTION_URI = "neo4j+s://b3cdfccc.databases.neo4j.io"
-NEO4J_USERNAME = "neo4j"
-NEO4J_PASSWORD = "WJABhWdjlQ1c5uo9ZVhtvFtP3hBn0RrOiBomaoPyR5w"
-print(NEO4J_CONNECTION_URI)
-
-
-# Neo4j Sense2Exion Database
-Graph = Graph(NEO4J_CONNECTION_URI, auth=(NEO4J_USERNAME, NEO4J_PASSWORD))
-g = Graph
-node_matcher = NodeMatcher(g)
-relationship_matcher = RelationshipMatcher(g)
-
-# Make a Basic query and return the results
-def main():
-    print("Imports working")
-
-    try:
-        query_all_exoskeletons = "MATCH (e:Exo) RETURN e.exoName as Name, e.exoManufacturer as Manufacturer, e.exoDescription as Description ORDER BY Name"
-        all_exoskeletons = g.run(query_all_exoskeletons).data()
-        queries = {"Exoskeletons": all_exoskeletons}
-        print(queries)
-    except Exception as e:
-        print(f"An error occurred: {e}")
-    
-if __name__ == "__main__":
-    main()
 ```
 
-## Further work TBH
+**Correct URI Format:**
+```python
+NEO4J_CONNECTION_URI = "neo4j+ssc://b3cdfccc.databases.neo4j.io"
+```
+
+This simple adjustment to the URI can resolve the "Cannot connect to any known routers" issue and ensure your connection to the Neo4j database is successful.
+
+By following this solution, you can avoid disruptions in your Neo4j database connectivity and continue working with confidence.
