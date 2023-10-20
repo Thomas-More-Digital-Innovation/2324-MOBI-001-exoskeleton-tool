@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Exolist</title>  <!-- Sets the title for the page -->
+{% endblock %}
+
+{% block navbar %}
+    {% from "components/navbar.html" import navbar %}
+    {{ navbar() }}
+{% endblock %}
+
+{% block header %}
+    <div class="my-10">
+        <a href="tool">
+            <button class="w-48 h-14 rounded-lg btn-primary text-center font-bold text-white">Ga terug</button>
+        </a>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="flex-col">
+        <div class="my-20">
+            <form action="/exolist" method="get" class="flex justify-center my-8">
+                <div class="mr-8">
+                    <label for="active_passive_filter" class="block font-bold text-gray-700 mb-2">Filter op Type:</label>
+                    <select name="active_passive" id="active_passive_filter" class="select">
+                        <option value="">Kies Type</option>
+                        <option value="actief">Actief</option>
+                        <option value="passief">Passief</option>
+                    </select>
+                </div>
+                <div class="mr-8">
+                    <label for="manufacturer_filter" class="block font-bold text-gray-700 mb-2">Filter op Fabrikant:</label>
+                    <select name="manufacturer" id="manufacturer_filter" class="select">
+                        <option value="">Kies Fabrikant</option>
+                        <option value="AGADE">AGADE</option>
+                        <option value="Archelis Inc">Archelis Inc</option>
+                        <!-- More manufacturer options -->
+                    </select>
+                </div>
+                <div class="mr-8">
+                    <label for="material_filter" class="block font-bold text-gray-700 mb-2">Filter op Materiaal:</label>
+                    <select name="material" id="material_filter" class="select">
+                        <option value="">Kies Materiaal</option>
+                        <option value="harde materialen">Harde Materialen</option>
+                        <option value="zachte materialen">Zachte Materialen</option>
+                    </select>
+                </div>
+                <div class="mr-8">
+                    <label for="one_two_sided_filter" class="block font-bold text-gray-700 mb-2">Filter op Aantal Zijden:</label>
+                    <select name="one_two_sided" id="one_two_sided_filter" class="select">
+                        <option value="">Kies Aantal Zijden</option>
+                        <option value="eenzijdig">Eenzijdig</option>
+                        <option value="dubbelzijdig">Dubbelzijdig</option>
+                    </select>
+                </div>
+                <div class="flex flex-col align-middle justify-center">
+                    <button type="submit" class="btn btn-primary">Apply Filter</button>
+                    <a href="/exolist" class="btn btn-secondary mt-2">Reset</a>  <!-- Reset button to clear filters -->
+                </div>
+            </form>
+        </div>
+        
+        {% for exoskeleton in exoskeletons %}
+        <div class="card mb-6 lg:card-side bg-base-100 shadow-xl border border-black">
+            <figure><img src="{{ url_for('static', filename='images/exoskeletons-resized-images/' ~ exoskeleton.Name|lower ~ '.png') }}" alt="{{ exoskeleton.Name }}_resized" /></figure>
+            <div class="card-body">
+                <h2 class="text-3xl font-semibold text-primary">{{ exoskeleton.Name }}</h2>
+                <div class="mt-5 text-content-center"> <!-- Add text-content-center class -->
+                    <p>Ontlast: {{ exoskeleton.Joint|join(', ') }}</p>
+                    <p>Type: {{ exoskeleton.ActivePassive }}</p>
+                    <p>Fabrikant: {{ exoskeleton.Manufacturer }}</p>
+                    <p>Materiaal: {{ exoskeleton.Material }}</p>
+                    <p>Aantal zijden: {{ exoskeleton.OneTwoSided }}</p>
+                </div>
+            </div>
+            <div class="card-actions justify-end">
+                <a class="h-full" href="">
+                    <button class="bg-primary h-full w-48 text-center text-xl font-bold text-white">Meer informatie</button>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

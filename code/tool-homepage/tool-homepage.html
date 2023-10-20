@@ -1,47 +1,58 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <title>Tool</title>
+    <title>Tool</title> <!-- Set the title for the webpage -->
 {% endblock %}
 
 {% block navbar %}
     {% from "components/navbar.html" import navbar %}
-    {{ navbar() }}
-{% endblock %}
-
-{% block header %}
-    <h1 class="text-4xl text-center my-5 text-primary">Tool voor het vinden van het correcte exoskelet.</h1>
+    {{ navbar() }} <!-- Include the navigation bar component -->
 {% endblock %}
 
 {% block body %}
-    <div class="w-fit h-height-tool-homepage-cards m-auto flex justify-center align-baseline gap-4">
+    <div class="w-fit h-height-tool-homepage-cards flex justify-center gap-5 my-10 mx-auto">
+        <!-- First Card - Search Exoskeleton Information -->
         <div class="card w-96 h-full border-2 border-black bg-base-100 shadow-xl relative flex flex-col justify-center">
             <figure><img src="../static/images/exoskeleton-poster.jpg" alt="exo"/></figure>
             <div class="card-body my-10">
                 <h2 class="text-center text-xl font-bold">Ik zoek informatie over exoskeletten.</h2>
+                <!-- A brief description of the purpose of this card -->
             </div>
             <a href="exolist">
-                <button class="w-full h-20 btn-primary text-center text-xl font-bold text-white">Matching tool voor exoskeletten.</button>
+                <button class="w-full h-20 btn-primary text-center text-xl font-bold text-white">
+                    Matching tool voor exoskeletten.
+                </button>
+                <!-- Link to the 'Matching tool for exoskeletten' -->
             </a>
         </div>
         
+        <!-- Second Card - Search Specific Exoskeleton Usage -->
         <div class="card w-96 h-full border-2 border-black bg-base-100 shadow-xl relative flex flex-col justify-center">
             <figure><img src="../static/images/exoskeleton-poster.jpg" alt="exo"/></figure>
             <div class="card-body my-10">
                 <h2 class="text-center text-xl font-bold">Ik zoek waarvoor ik een specifiek exoskelet kan gebruiken.</h2>
+                <!-- A brief description of the purpose of this card -->
             </div>
             <a href="exolist">
-                <button class="w-full h-20 btn-primary text-center text-xl font-bold text-white">Matching tool voor exoskeletten.</button>
+                <button class="w-full h-20 btn-primary text-center text-xl font-bold text-white">
+                    Matching tool voor exoskeletten.
+                </button>
+                <!-- Link to the 'Matching tool for exoskeletten' -->
             </a>
         </div>  
 
+        <!-- Third Card - Search Exoskeletons for Professional Activities -->
         <div class="card w-96 h-full border-2 border-black bg-base-100 shadow-xl relative flex flex-col justify-center">
             <figure><img src="../static/images/exoskeleton-poster.jpg" alt="exo"/></figure>
             <div class="card-body my-10">
                 <h2 class="text-center text-xl font-bold">Ik zoek mogelijke exoskeletten voor een professionele activiteit.</h2>
+                <!-- A brief description of the purpose of this card -->
             </div>
             <a href="exolist">
-                <button class="w-full h-20 btn-primary text-center text-xl font-bold text-white">Matching tool voor exoskeletten.</button>
+                <button class="w-full h-20 btn-primary text-center text-xl font-bold text-white">
+                    Matching tool voor exoskeletten.
+                </button>
+                <!-- Link to the 'Matching tool for exoskeletten' -->
             </a>
         </div> 
     </div>
