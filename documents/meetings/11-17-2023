@@ -1,0 +1,29 @@
+# Statusmeeting 11-17-2023
+
+## Wanneer
+* Datum: Vrijdag, 11-17-2023
+* Tijd: 11u30 - 11u45
+* Locatie: Mobi-Lab
+
+## Agendapunten:
+* Wat is er deze week afgewerkt?
+* Wat moet er volgende week afgewerkt worden?
+* Opzoek werk
+
+## Wat is er deze week afgewerkt?
+* Exodetails page: 
+  * algemene informatie, gedetaileerde informatie, deelbeweging en professionele activiteiten dynamisch inladen vanuit queries en wanneer er geen data beschikbaar is dit niet tonen / vervang tekst plaatsen
+  * Volledige layout van de details page
+  * (deze pagina is nu normaalgezien volledig afgerond)
+* Deployen van de nieuwste versie van de website naar de Azure webhosting
+  * Probleem met de deployment van github naar Azure webhosting (probleem met de py2neo import in the requirments.txt file)
+
+## Wat moet er volgende week afgewerkt worden?
+* Opstart van de nieuwe filter
+* (Nog uitzoeken van de compact, water- en stofbestendig filters)
+
+# Opzoek werk:
+* Opzoeken / vragen hoe ik de compact, water- en stofbestendig filters moet maken
+
+## Volgende statusmeeting:
+* Donderdag, 24-11-2023
