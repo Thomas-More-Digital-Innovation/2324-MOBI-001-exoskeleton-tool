@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Exolist</title>
+{% endblock %}
+
+{% block navbar %}
+    {% from "components/navbar.html" import navbar %}
+    {{ navbar() }}
+{% endblock %}
+
+{% block header %}
+    <div class="my-10">
+        <a href="tool">
+            <button class="w-48 h-14 rounded-lg btn-primary text-center font-bold text-white">Ga terug</button>
+        </a>
+    </div>
+{% endblock %}
+
+{% block body %} 
+    <div class="my-20">
+        <form action="/exolist" method="get" class="flex flex-col items-center">
+            <!-- Search box -->
+            <div class="w-96 mb-4 text-center">
+                <label for="search_query" class="block text-lg font-semibold text-primary mb-2">Zoek op naam:</label>
+                <input type="text" name="search_query" id="search_query" class="input" placeholder="Enter a name">
+            </div>
+
+            <!-- Filter options -->
+            <div class="flex flex-wrap justify-center space-x-4">
+                <div class="mb-5">
+                    <label for="active_passive_filter" class="block text-lg font-semibold text-primary mb-2">Type:</label>
+                    <select name="active_passive" id="active_passive_filter" class="select">
+                        <option value="">Kies Type</option>
+                        <option value="actief">Actief</option>
+                        <option value="passief">Passief</option>
+                    </select>
+                </div>
+
+                <div class="mb-5">
+                    <label for="manufacturer_filter" class="block text-lg font-semibold text-primary mb-2">Fabrikant:</label>
+                    <select name="manufacturer" id="manufacturer_filter" class="select" multiple>
+                        <!-- Manufacturer options -->
+                        <option value="">Meer als een Fabrikant gebruik ctrl+klik</option>
+                        <option value="AGADE">AGADE</option>
+                        <option value="Archelis Inc">Archelis Inc</option>
+                        <option value="Astride Bionics">Astride Bionics</option>
+                        <option value="Auxivo">Auxivo</option>
+                        <option value="BeMedico">BeMedico</option>
+                        <option value="Bioservo Technologies">Bioservo Technologies</option>
+                        <option value="Comau">Comau</option>
+                        <option value="Cyber Human Systems">Cyber Human Systems</option>
+                        <option value="Ekso Bionics">Ekso Bionics</option>
+                        <option value="Ergodyne">Ergodyne</option>
+                        <option value="Ergosanté">Ergosanté</option>
+                        <option value="Exomys - Augmented Humanity GmbH">Exomys - Augmented Humanity GmbH</option>
+                        <option value="German Bionic">German Bionic</option>
+                        <option value="HMT">HMT</option>
+                        <option value="HeroWear">HeroWear</option>
+                        <option value="Hunic">Hunic</option>
+                        <option value="Laevo">Laevo</option>
+                        <option value="Noonee">Noonee</option>
+                        <option value="Ottobock Bionic Exoskeletons">Ottobock Bionic Exoskeletons</option>
+                        <option value="Skelex">Skelex</option>
+                    </select>
+                </div>
+
+                <div class="mb-5">
+                    <label for="material_filter" class="block text-lg font-semibold text-primary mb-2">Materiaal:</label>
+                    <select name="material" id="material_filter" class="select">
+                        <!-- Material options -->
+                        <option value="">Kies Materiaal</option>
+                        <option value="harde materialen">Harde Materialen</option>
+                        <option value="zachte materialen">Zachte Materialen</option>
+                    </select>
+                </div>
+
+                <div class="mb-5">
+                    <label for="one_two_sided_filter" class="block text-lg font-semibold text-primary mb-2">Zijden:</label>
+                    <select name="one_two_sided" id="one_two_sided_filter" class="select">
+                        <!-- Aantal Zijden options -->
+                        <option value="">Kies Aantal Zijden</option>
+                        <option value="eenzijdig">Eenzijdig</option>
+                        <option value="dubbelzijdig">Dubbelzijdig</option>
+                    </select>
+                </div>
+
+                <div class="mb-5">
+                    <label for="compact_filter" class="block text-lg font-semibold text-primary mb-2">Compact Filter:</label>
+                    <input type="checkbox" name="compact" id="compact_filter" class="input" value="ja">
+                </div>
+            </div>
+
+            <!-- Apply and Reset buttons -->
+            <div class="flex space-x-2 my-10">
+                <button type="submit" class="btn btn-primary w-1/2">Filter</button>
+                <a href="/exolist" class="btn btn-secondary w-1/2">Reset</a>
+            </div>            
+        </form>
+
+        <div class="mt-10">
+            <p class="text-lg font-bold text-primary text-center">Gekozen filter opties:</p>
+            <div class="flex flex-wrap justify-center mt-2 -mx-2 my-2">
+                <!-- Filter options display -->
+                {% if active_passive_filter %}
+                <div class="p-2 bg-gray-200 rounded-md mx-2 my-2">
+                    <span>Actief/Passief: {{ active_passive_filter }}</span>
+                </div>
+                {% endif %}
+        
+                {% if search_query %}
+                <div class="p-2 bg-gray-200 rounded-md mx-2 my-2">
+                    <span>Naam: {{ search_query }}</span>
+                </div>
+                {% endif %}
+        
+                {% for mf in manufacturer_filter %}
+                <div class="p-2 bg-gray-200 rounded-md mx-2 my-2">
+                    <span>Fabrikant: {{ mf }}</span>
+                </div>
+                {% endfor %}
+        
+                {% if material_filter %}
+                <div class="p-2 bg-gray-200 rounded-md mx-2 my-2">
+                    <span>Materiaal: {{ material_filter }}</span>
+                </div>
+                {% endif %}
+        
+                {% if one_two_sided_filter %}
+                <div class="p-2 bg-gray-200 rounded-md mx-2 my-2">
+                    <span>Eenzijdig/dubbelzijdig: {{ one_two_sided_filter }}</span>
+                </div>
+                {% endif %}
+        
+                {% if not (active_passive_filter or manufacturer_filter or material_filter or one_two_sided_filter or search_query) %}
+                <div class="p-2 bg-gray-200 rounded-md mx-2 my-2">
+                    <span>Geen filter ingesteld</span>
+                </div>
+                {% endif %}
+            </div>
+        </div>             
+    </div>
+
+    {% for exoskeleton in exoskeletons %}
+    <div class="card mb-6 lg:card-side bg-base-100 shadow-xl border border-black">
+        <figure><img src="{{ url_for('static', filename='images/exoskeletons-resized-images/' ~ exoskeleton.Name ~ '.png') }}" alt="{{ exoskeleton.Name }}_resized" /></figure>
+        <div class="card-body">
+            <h2 class="ml-20 text-3xl font-semibold text-primary">{{ exoskeleton.Name}}</h2>
+            <div class="mt-10 ml-20 flex gap-5">
+                <div class="w-1/2">
+                    <p>
+                        <span class="text-lg font-semibold text-primary">Ontlast: </span>
+                        {% if exoskeleton.Joint %}
+                            {{ exoskeleton.Joint|join(', ') }}
+                        {% else %}
+                            Niet gekend
+                        {% endif %}
+                    </p>
+                    <p> <span class="text-lg font-semibold text-primary">Type: </span>{{ exoskeleton.ActivePassive }}</p>
+                    <p> <span class="text-lg font-semibold text-primary">Fabrikant: </span>{{ exoskeleton.Manufacturer }}</p>
+                    <p> <span class="text-lg font-semibold text-primary">Materiaal: </span>{{ exoskeleton.Material }}</p>
+                    <p> <span class="text-lg font-semibold text-primary">Aantal zijden: </span>{{ exoskeleton.OneTwoSided }}</p>
+                </div>
+                <div class="w-1/2">
+                    <p class="text-lg font-semibold text-primary">Extra eigenschappen: </p>   
+                    {% if exoskeleton.id in properties_dict %}
+                        {% for property_value in properties_dict[exoskeleton.id] %}
+                            <p>
+                                <span class="text-lg font-semibold text-primary">{{ property_value.property }}: </span>
+                                {% if property_value.value %}
+                                    {{ property_value.value }}
+                                {% else %}
+                                    Niet gekend
+                                {% endif %}
+                            </p>
+                        {% endfor %}
+                    {% else %}
+                        Niet gekend
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="card-actions justify-end">
+            <a class="h-full" href="{{ url_for('exoskeleton_details', exo_id=exoskeleton.id) }}">
+                <button class="bg-primary h-full w-48 text-center text-xl font-bold text-white">Meer informatie</button>
+            </a>
+            
+        </div>
+    </div>
+    {% endfor %}
+    
+{% endblock %}
+
