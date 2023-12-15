@@ -22,8 +22,8 @@ The primary goal of this project revolves around enhancing the user experience, 
 
 ### My objectives:
 1. Improving Layout, Styling, and Performance:
-  * Enhance the visual appeal and layout of the existing home and tool pages.
-  * Optimize the performance of these pages to ensure a smoother user experience.
+ * Enhance the visual appeal and layout of the existing home and tool pages.
+ * Optimize the performance of these pages to ensure a smoother user experience.
 2. Exoskeleton List Page:
   * General Styling and Layout: Create an intuitive and visually appealing design for the Exoskeleton List page.
   * Exoskeleton Filter: Implement a filter system that utilizes multiple attributes to refine exoskeleton search results.
