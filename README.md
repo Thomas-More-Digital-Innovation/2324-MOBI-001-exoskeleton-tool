@@ -2,6 +2,13 @@
 
 Welcome to the Exoskeleton Tool project! This website-based application is designed to serve as a valuable resource for Mobilab Thomas More Geel. It combines cutting-edge technologies to provide an informative website and a powerful tool for accessing data related to exoskeletons and sensors.
 
+Here you can find some links to the parts of the project I've worked on:
+* [Home page](https://sense-to-exion.azurewebsites.net/) - with new and improved design
+* [Tool page](https://sense-to-exion.azurewebsites.net/tool) - with new and improved design
+* [ExoList page](https://sense-to-exion.azurewebsites.net/exolist) - with custom design, dynamic filter and exoskeleton cards
+* [ExoDetails page](https://sense-to-exion.azurewebsites.net/exoskeleton/19) - with custom design, dynamic database retrieval with information about a specific exoskeleton 
+* [AdvancedExoFilter page](https://sense-to-exion.azurewebsites.net/advancedFilter) - startup of the advanced filter, still a WIP
+
 ## Overview
 This project focuses on creating an exoskeleton tool using a variety of technologies:
 * Framework: We've chosen Flask, a Python web framework, for the backend of our application. It enables us to build robust web applications with ease.
