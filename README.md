@@ -9,6 +9,8 @@ Here you can find some links to the parts of the project I've worked on:
 * [ExoDetails page](https://sense-to-exion.azurewebsites.net/exoskeleton/19) - with custom design, dynamic database retrieval with information about a specific exoskeleton 
 * [AdvancedExoFilter page](https://sense-to-exion.azurewebsites.net/advancedFilter) - startup of the advanced filter, still a WIP
 
+_All artworks used in this project are generated using Bing AI and are royalty-free._
+
 ## Overview
 This project focuses on creating an exoskeleton tool using a variety of technologies:
 * Framework: We've chosen Flask, a Python web framework, for the backend of our application. It enables us to build robust web applications with ease.
