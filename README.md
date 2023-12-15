@@ -2,12 +2,22 @@
 
 Welcome to the Exoskeleton Tool project! This website-based application is designed to serve as a valuable resource for Mobilab Thomas More Geel. It combines cutting-edge technologies to provide an informative website and a powerful tool for accessing data related to exoskeletons and sensors.
 
-Here you can find some links to the parts of the project I've worked on:
+**Here you can find some links to the parts of the project I've worked on:**
 * [Home page](https://sense-to-exion.azurewebsites.net/) - with new and improved design
 * [Tool page](https://sense-to-exion.azurewebsites.net/tool) - with new and improved design
 * [ExoList page](https://sense-to-exion.azurewebsites.net/exolist) - with custom design, dynamic filter and exoskeleton cards
 * [ExoDetails page](https://sense-to-exion.azurewebsites.net/exoskeleton/19) - with custom design, dynamic database retrieval with information about a specific exoskeleton 
 * [AdvancedExoFilter page](https://sense-to-exion.azurewebsites.net/advancedFilter) - startup of the advanced filter, still a WIP
+
+**Here you can find some images of the result:**
+
+![HomePage1](./documents/pictures/HomePage1.png)
+---
+![HomePage2](./documents/pictures/HomePage2.png)
+---
+![FilterPage1](./documents/pictures/FilterPage1.png)
+---
+![DetailsPage1](./documents/pictures/DetailsPage1.png)
 
 _All artworks used in this project are generated using Bing AI and are royalty-free._
 
