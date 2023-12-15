@@ -21,17 +21,17 @@ Our primary goal is to create a user-friendly website that serves as an essentia
 The primary goal of this project revolves around enhancing the user experience, aesthetics, and performance of the existing home and tool pages. Additionally, the project aims to introduce two new key features: the "Exoskeleton List" page and the "Exoskeleton Details" page
 
 ### My objectives:
-1. Improving Layout, Styling, and Performance:
+#### 1. Improving Layout, Styling, and Performance:
  * Enhance the visual appeal and layout of the existing home and tool pages.
  * Optimize the performance of these pages to ensure a smoother user experience.
-2. Exoskeleton List Page:
+#### 2. Exoskeleton List Page:
   * General Styling and Layout: Create an intuitive and visually appealing design for the Exoskeleton List page.
   * Exoskeleton Filter: Implement a filter system that utilizes multiple attributes to refine exoskeleton search results.
   * List of Exoskeletons: Display a comprehensive list of all exoskeletons, showcasing their "base" attributes for quick reference.
-3. Exoskeleton Details Page:
+#### 3. Exoskeleton Details Page:
   * General Styling and Layout: Design a clean and user-friendly layout for the Exoskeleton Details page.
   * Comprehensive Information: Provide detailed information about a selected exoskeleton from the Exoskeleton List. Split the information into sections such as general details, detailed specifications, movement capabilities, and   professional activities.
-4. Advanced Filter Page (Future Enhancement):
+#### 4. Advanced Filter Page (Future Enhancement):
   * Start-up Implementation: Consideration for an advanced filter page with more in-depth filtering options. This feature falls outside the Minimum Viable Product (MVP) scope and will be pursued when time permits.
 
 ## Trello Board
