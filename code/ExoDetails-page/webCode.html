@@ -1,0 +1,296 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Exolist</title>
+{% endblock %}
+
+{% block navbar %}
+    {% from "components/navbar.html" import navbar %}
+    {{ navbar() }}
+{% endblock %}
+
+{% block header %}
+    <div class="flex justify-center gap-5 my-5">
+        <div>
+            <a href="{{ url_for('exolist', 
+                                active_passive=session['active_passive_filter'],
+                                manufacturer=session['manufacturer_filter'],
+                                material=session['material_filter'],
+                                one_two_sided=session['one_two_sided_filter'],
+                                compact=session['compact_filter'],
+                                waterbestendig=session['water_filter'],
+                                stofbestendig=session['stof_filter']) }}">
+                <button class="w-60 h-14 rounded-lg btn-primary text-center font-bold text-white">Ga terug</button>
+            </a>
+        </div>
+        
+        <div>
+            <a href="#algemeneInformatie">
+                <button class="w-60 h-14 rounded-lg btn-primary text-center font-bold text-white">Algemene informatie</button>
+            </a>
+        </div>
+        <div>
+            <a href="#gedetailleerdeInformatie">
+                <button class="w-60 h-14 rounded-lg btn-primary text-center font-bold text-white">Gedetailleerde informatie</button>
+            </a>
+        </div>
+        <div>
+            <a href="#deelbeweging">
+                <button class="w-60 h-14 rounded-lg btn-primary text-center font-bold text-white">Deelbeweging</button>
+            </a>
+        </div>
+        <div>
+            <a href="#professioneleActiviteiten">
+                <button class="w-60 h-14 rounded-lg btn-primary text-center font-bold text-white">Professionele activiteiten</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="relative w-full h-full mb-6 bg-base-100 shadow-xl border border-black rounded-2xl" id="algemeneInformatie">
+        <div class="bg-primary w-full h-16 rounded-t-2xl flex items-center">
+            <h2 class="pl-10 text-white text-3xl font-semibold">Algemene informatie over de {{ exoskeleton.exoName }}</h2>
+        </div>
+        <div class="flex m-auto">
+            <div>
+                <figure class="h-full w-full">
+                    <img src="{{ url_for('static', filename='images/exoskeletons-resized-images/' ~ exoskeleton.exoName ~ '.png') }}" alt="{{ exoskeleton.exoName }}_resized" class="rounded-bl-2xl w-full h-full object-cover"/>
+                </figure>
+            </div>
+            <div class="flex-col ml-20 my-10">
+                <div class="flex">
+                    <div class="mr-60">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="font-semibold text-primary">Ontlast:</td>
+                                    <td>
+                                        {% if joints %}
+                                            {{ joints|join(', ') }}
+                                        {% else %}
+                                            Niet gekend
+                                        {% endif %}
+                                    </td>
+                                </tr>                        
+                                <tr>
+                                    <td class="font-semibold text-primary">Type: </td>
+                                    <td>{{ exoskeleton.exoActivePassive}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold text-primary">Fabrikant:</td>
+                                    <td>{{ exoskeleton.exoManufacturer}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold text-primary">Materiaal:</td>
+                                    <td>{{ exoskeleton.exoMaterial}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="font-semibold text-primary">Aantal zijden:</td>
+                                    <td>{{ exoskeleton.exoOneTwoSided }}</td>
+                                </tr>                                                 
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <table>
+                            <tr>
+                                <td class="font-semibold text-primary">Extra eigenschappen:</td>
+                            </tr>
+                            {% if properties %}
+                                {% for property in properties %}
+                                    <tr>
+                                        <td class="font-semibold text-primary capitalize">{{ property.property }}:</td>
+                                        <td>{{ property.value }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td>geen gekend</td>
+                                </tr>
+                            {% endif %}
+                        </table>
+                    </div>
+                </div>
+
+                <div class="m-auto">
+                    <table>
+                        <tr>
+                            <td class="font-semibold text-primary">Beschrijving:</td>
+                            <td class="max-w-xl">{{ exoskeleton.exoDescription }}</td>
+                        </tr> 
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if fromPart or toPart or houdingsondersteuning_bij or houdingsondersteuning_door or vergemakkelijkt or limiteert %}
+    <div class="relative w-full h-full mb-6 bg-base-100 shadow-xl border border-black rounded-2xl" id="algemeneInformatie">
+        <div class="bg-primary w-full h-16 rounded-t-2xl flex items-center">
+            <h2 class="pl-10 text-white text-3xl font-semibold">Gedetailleerde informatie over de {{ exoskeleton.exoName }}</h2>
+        </div>
+        <div class="flex m-auto">
+            <div>
+                <figure>
+                    <img src="../static/images/icons/ExoRelaties.png" alt="ExoRelaties.png" class="rounded-bl-2xl w-full h-full object-cover"/>
+                </figure>
+            </div>
+            <div class="my-10 ml-20">
+                <table>
+                    <tbody>
+                        {% if fromPart and toPart %}
+                            <tr>
+                                <td class="font-semibold text-primary">Overbreng kracht: </td>
+                                <td>van: {{ fromPart }}, naar: {{ toPart }}</td>
+                            </tr>
+                        {% endif %}                       
+                        {% if houdingsondersteuning_bij %}
+                            <tr>
+                                <td class="font-semibold text-primary">Houdingsondersteuning bij:</td>
+                                <td>
+                                    <ul class="list-inside">
+                                        {% for ondersteuning_bij in houdingsondersteuning_bij %}
+                                            <li>{{ ondersteuning_bij }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if houdingsondersteuning_door %}
+                            <tr>
+                                <td class="font-semibold text-primary">Houdingsondersteuning door:</td>
+                                <td>
+                                    <ul class="list-inside">
+                                        {% for ondersteuning_door in houdingsondersteuning_door %}
+                                            <li>{{ ondersteuning_door }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if vergemakkelijkt %}
+                            <tr>
+                                <td class="font-semibold text-primary">Vergemakkelijkt: </td>
+                                <td>
+                                    <ul class="list-inside">
+                                        {% for makkelijkMaker in vergemakkelijkt %}
+                                            <li>{{ makkelijkMaker }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% if limiteert %}
+                            <tr>
+                                <td class="font-semibold text-primary">Limiteert:</td>
+                                <td>
+                                    <ul class="list-inside">
+                                        {% for limitatie in limiteert %}
+                                            <li>{{ limitatie }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                        {% endif %}                                                      
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="relative w-full h-full mb-6 bg-base-100 shadow-xl border border-black rounded-2xl" id="deelbeweging">
+        <div class="bg-primary w-full h-16 rounded-t-2xl flex items-center">
+            <h2 class="pl-10 text-white text-3xl font-semibold">Deelbewegingen van de {{ exoskeleton.exoName }}</h2>
+        </div>
+        <div class="flex m-auto">
+            <div class="p-5">
+                <figure><img src="../static/images/icons/deelbeweging.png" 
+                    alt="detailsIcon" class="rounded-bl-2xl w-full h-full object-cover"/>
+                </figure>
+            </div>
+            <div class="flex my-10 ml-20">
+                <div class="mr-60">
+                    <h2 class="text-lg font-semibold text-primary">Aangewezen deelbewegingen:</h2>
+                    <h3 class="pt-5">Hoofddoelen:</h3>
+                    {% if maingoals %}
+                        <ul class="max-w-lg pl-5 list-disc list-inside">
+                            {% for maingoal in maingoals %}
+                                <li>{{ maingoal }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Geen gevonden</p>
+                    {% endif %}
+
+                    <h3 class="pt-10">Nevendoelen:</h3>
+                    {% if sidegoals %}
+                        <ul class="max-w-lg pl-5 list-disc list-inside">
+                            {% for sidegoal in sidegoals %}
+                                <li>{{ sidegoal }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Geen gevonden</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <h2 class="text-lg font-semibold text-primary">Niet aangeraden deelbewegingen:</h2>
+                    {% if contraindications %}
+                        <ul class="max-w-lg pl-5 list-disc list-inside">
+                            {% for contraindication in contraindications %}
+                                <li>{{ contraindication }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Geen gevonden</p>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <div class="relative w-full h-full mb-6 bg-base-100 shadow-xl border border-black rounded-2xl" id="professioneleActiviteiten">
+        <div class="bg-primary w-full h-16 rounded-t-2xl flex items-center">
+            <h2 class="pl-10 text-white text-3xl font-semibold ">Professionele activiteiten die je met de {{ exoskeleton.exoName }} kan uitvoeren</h2>
+        </div>
+        <div class="flex m-auto">
+            <div class="p-5">
+                <figure><img src="../static/images/icons/professionleActiviteiten.png" 
+                    alt="detailsIcon" class="rounded-bl-2xl w-fit h-full"/>
+                </figure>
+            </div>
+            <div class="flex my-10 ml-20">
+                <div class="mr-48">
+                    {% if main_activities %}
+                        <h2 class="text-lg font-semibold text-primary">Hoofdactiviteiten:</h2>
+                        <ul class="max-w-xs pl-5 list-disc list-inside">
+                            {% for activity in main_activities %}
+                                <li>{{ activity }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <h2 class="text-lg font-semibold text-primary">Hoofdactiviteiten:</h2>
+                        <p class="text-base text-gray-500">Geen gevonden</p>
+                    {% endif %}
+                </div>
+                <div>
+                    {% if side_activities %}
+                        <h2 class="text-lg font-semibold text-primary">Aangrenzende activiteiten:</h2>
+                        <ul class="max-w-lg pl-5 list-disc list-inside">
+                            {% for activity in side_activities %}
+                                <li>{{ activity }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                            <h2 class="text-lg font-semibold text-primary">Aangrenzende activiteiten:</h2>
+                            <p class="text-base text-gray-500">Geen gevonden</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}

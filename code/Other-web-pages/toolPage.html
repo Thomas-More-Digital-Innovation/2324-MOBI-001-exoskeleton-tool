@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block navbar %}
+    {% from "components/navbar.html" import navbar %}
+    {{ navbar() }}
+{% endblock %}
+
+{% block body %}
+    <figure>
+        <img id="posterImage" src="../static/images/cover-exotool.png" alt="cover-exotool" class="my-5 mx-auto w-full h-fit rounded-2xl shadow-xl">
+    </figure>
+
+    <div class="divider py-3 text-primary text-lg font-semibold">Wij helpen u met het vinden van het ideale exoskelet</div>
+    <p class="mb-5 text-center max-w-xl m-auto">Ontdek het geschikte exoskelet voor jouw behoeften met behulp van onze handige tool. 
+        Gebruik filters om specifieke eigenschappen te selecteren en vind gemakkelijk een exoskelet dat past bij jouw toepassing.
+    </p>
+    <div class="mt-5 grid grid-cols-2 gap-4">
+        <div class="card w-144 bg-base-100 shadow-xl image-full">
+            <figure><img class="object-cover" src="../static/images/generated-image-8.jpeg" alt="generated-image8"/>
+            </figure>
+            <div class="card-body">
+                <h2 class="card-title text-4xl text-primary">Exoskelet specificatie filter</h2>
+                <p class="text-lg">Ik zoek informatie over exoskeletten of waarvoor ik een specifiek exoskelet kan gebruiken.</p>
+                <a href="{{ url_for('exolist') }}">
+                    <div class="card-actions justify-end">
+                        <button class="btn btn-tertiary bg-secondary text-base-200">Klik hier</button>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="card w-144 bg-base-100 shadow-xl image-full">
+            <figure><img class="object-cover" src="../static/images/generated-image-4.jpg" alt="generated-image4"/>
+            </figure>
+            <div class="card-body">
+                <h2 class="card-title text-4xl text-primary">Exoskelet activiteiten filter</h2>
+                <p class="text-lg">Ik zoek mogelijke exoskeletten voor een professionele activiteit.</p>
+                <a href="{{ url_for('advancedFilter') }}">
+                    <div class="card-actions justify-end">
+                        <button class="btn btn-tertiary bg-secondary text-base-200">Klik Hier</button>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
