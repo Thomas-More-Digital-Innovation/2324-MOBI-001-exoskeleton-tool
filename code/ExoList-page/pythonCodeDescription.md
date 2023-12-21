@@ -1,36 +1,44 @@
-# Exolist Route Documentation
+# Code Documentation for '/exolist'
 
-The `/exolist` route in this Flask application fetches and displays a list of exoskeletons from a Neo4j database. The list can be filtered based on various criteria using query parameters.
+## Overview
+The provided Flask code defines a route for the `/exolist` endpoint, which displays a list of exoskeletons based on various filters and a search query. The code interacts with a Neo4j database to retrieve and filter exoskeleton data.
 
-## Filters
+## Function: exolist()
+This function is the main route handler for displaying the exoskeleton list.
 
-The route accepts the following query parameters as filters:
+### Request Parameters
+- **active_passive_filter**: Filter for exoskeleton active/passive status.
+- **joint_filter**: Filter for exoskeleton joints.
+- **manufacturer_filter**: Filter for exoskeleton manufacturers.
+- **material_filter**: Filter for exoskeleton materials.
+- **one_two_sided_filter**: Filter for one/two-sided exoskeletons.
+- **compact_filter, water_filter, stof_filter**: Filters for specific properties.
+- **search_query**: Search query for exoskeleton names.
 
-- **active_passive_filter**: Filters exoskeletons based on whether they are active or passive.
-- **manufacturer_filter**: Filters exoskeletons based on the manufacturer(s).
-- **material_filter**: Filters exoskeletons based on the material.
-- **one_two_sided_filter**: Filters exoskeletons based on whether they are one or two-sided.
-- **search_query**: Allows users to search for exoskeletons by name.
-- **compact_filter**: Filters exoskeletons based on a property named 'compact' with a specific value.
+### Neo4j Queries
+The code constructs Neo4j queries to retrieve exoskeleton data and property values. The base query includes optional matches for joints and properties.
 
-## Base Query
+### Where Conditions
+Filter conditions are dynamically added to the Neo4j query based on the request parameters. Conditions include active/passive status, joints, manufacturers, materials, and specific property values.
 
-The base query retrieves exoskeletons along with their main degrees of freedom (DOF) and associated joints. The result is used to build the list of exoskeletons and their joint information.
+### Data Processing
+- Retrieved exoskeleton data is processed to remove duplicates based on the 'id' field.
+- Property values are fetched separately from the Neo4j database.
 
-## Where Conditions
+### Session Storage
+Filter values are stored in the Flask session for user persistence across requests.
 
-Various `where_conditions` are dynamically constructed based on the provided filters. Each condition corresponds to a specific filter, and these conditions are combined to form the `WHERE` clause in the Neo4j Cypher query.
+### Debugging
+The WHERE clause and conditions are printed for debugging purposes.
 
-## Full Query
+### Rendering
+The processed data is passed to the 'exolist.html' template for rendering.
 
-The complete Cypher query is constructed by combining the base query and the `WHERE` clause. The query fetches exoskeleton details such as ID, name, joints, activity type, manufacturer, material, one/two-sided information, and description. The result is ordered by exoskeleton name.
+## Template Rendering
+The `exolist.html` template is rendered with the following data:
+- `exoskeletons`: Processed exoskeleton data.
+- `properties_dict`: Dictionary of property values for each exoskeleton.
+- Filter values for active_passive, manufacturer, material, etc.
 
-## Properties Query
-
-A separate query retrieves exoskeleton properties such as 'compact' and their values. The results are used to create a dictionary (`properties_dict`) mapping exoskeleton IDs to their property values.
-
-## Rendering Template
-
-Finally, the route renders the `exolist.html` template, passing the fetched exoskeleton data, properties dictionary, and filter parameters to be displayed to the user.
-
-This documentation provides a comprehensive understanding of how the `/exolist` route works, making it easier for developers to contribute or understand the functionality.
+## Conclusion
+This Flask route provides a dynamic and filtered view of exoskeleton data based on user input. It leverages Neo4j queries to fetch and process data, and the results are presented in an HTML template.
